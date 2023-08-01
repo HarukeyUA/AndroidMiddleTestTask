@@ -21,6 +21,14 @@ class VendorsRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun getVendors(query: String): List<Vendor> = withContext(workDispatcher) {
+        api.getVendors().filter {
+            it.companyName.contains(query, ignoreCase = true)
+        }.map {
+            it.toVendor()
+        }
+    }
+
     private suspend fun NetworkVendor.toVendor() = coroutineScope {
 
         val categories = categories?.map {
