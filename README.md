@@ -1,3 +1,5 @@
+[Screen_recording_20230801_202028.webm](https://github.com/HarukeyUA/AndroidMiddleTestTask/assets/12065476/6ef8ac4d-200d-40f8-9169-cc8931c98bad)
+
 In this challenge, you will expand the previously created functionality.
 
 This is a complex task that consists of 3 parts:
