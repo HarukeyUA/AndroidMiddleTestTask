@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.youarelaunched.challenge.ui.screen.state.VendorsScreenUiState
 import com.youarelaunched.challenge.ui.screen.view.components.ChatsumerSnackbar
+import com.youarelaunched.challenge.ui.screen.view.components.SearchField
 import com.youarelaunched.challenge.ui.screen.view.components.VendorItem
 import com.youarelaunched.challenge.ui.theme.VendorAppTheme
 
@@ -33,7 +34,16 @@ fun VendorsScreen(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         backgroundColor = VendorAppTheme.colors.background,
-        snackbarHost = { ChatsumerSnackbar(it) }
+        snackbarHost = { ChatsumerSnackbar(it) },
+        topBar = {
+            SearchField(
+                value = "",
+                onValueChange = { },
+                onSearch = { },
+                modifier = Modifier
+                    .padding(top = 24.dp, start = 16.dp, end = 16.dp)
+            )
+        }
     ) { paddings ->
         if (!uiState.vendors.isNullOrEmpty()) {
             LazyColumn(
