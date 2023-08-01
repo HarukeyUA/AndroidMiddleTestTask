@@ -30,6 +30,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -39,6 +40,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.youarelaunched.challenge.middle.R
 import com.youarelaunched.challenge.ui.theme.VendorAppTheme
+
+const val SEARCH_FIELD_TEST_TAG = "SEARCH_FIELD"
 
 @RequiresApi(28)
 fun Modifier.advancedShadow(
@@ -84,7 +87,8 @@ fun SearchField(
         singleLine = true,
         textStyle = VendorAppTheme.typography.subtitle2,
         modifier = modifier
-            .heightIn(min = 40.dp),
+            .heightIn(min = 40.dp)
+            .testTag(SEARCH_FIELD_TEST_TAG),
         cursorBrush = SolidColor(VendorAppTheme.colors.colorPrimary),
         keyboardOptions = KeyboardOptions(
             imeAction = ImeAction.Search
@@ -98,11 +102,13 @@ fun SearchField(
                 modifier = Modifier
                     .let {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                            it.advancedShadow(
-                                shadowRadius = 14.dp,
-                                offsetY = 6.dp,
-                                alpha = 0.05f
-                            ).clip(RoundedCornerShape(16.dp))
+                            it
+                                .advancedShadow(
+                                    shadowRadius = 14.dp,
+                                    offsetY = 6.dp,
+                                    alpha = 0.05f
+                                )
+                                .clip(RoundedCornerShape(16.dp))
                         } else {
                             it.shadow(
                                 elevation = 4.dp,

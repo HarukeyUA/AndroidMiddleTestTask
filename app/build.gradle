@@ -16,6 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
 
+        testInstrumentationRunner = "com.youarelaunched.challenge.TestRunner"
         vectorDrawables {
             useSupportLibrary true
         }
@@ -80,4 +81,21 @@ dependencies {
     kapt hiltDependencies.kapt
 
     implementation retrofit.jsonConverter
+    testImplementation junit.lib
+    testImplementation coroutines.test
+    testImplementation kotlinTest.lib
+    androidTestImplementation kotlinTest.lib
+
+    androidTestImplementation androidXTest.testCore
+    androidTestImplementation androidXTest.espresso
+    androidTestImplementation androidXTest.testExt
+    androidTestImplementation androidXTest.testRules
+    androidTestImplementation androidXTest.testRunner
+    androidTestImplementation androidXTest.uiAutomator
+
+    androidTestImplementation compose.uiTest
+    debugImplementation compose.testManifest
+
+    androidTestImplementation hiltDependencies.test
+    kaptAndroidTest hiltDependencies.kaptTest
 }

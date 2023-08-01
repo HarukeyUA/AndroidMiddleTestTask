@@ -6,6 +6,7 @@ import com.youarelaunched.challenge.data.repository.VendorsRepository
 import com.youarelaunched.challenge.data.repository.model.Vendor
 import com.youarelaunched.challenge.ui.screen.state.VendorsScreenUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -20,6 +21,11 @@ import javax.inject.Inject
 class VendorsVM @Inject constructor(
     private val repository: VendorsRepository
 ) : ViewModel() {
+
+    private val coroutineExceptionHandler = CoroutineExceptionHandler { _, _ ->
+        // TODO: Proper error handling
+        _vendorList.value = null
+    }
 
     private val _searchQuery = MutableStateFlow("")
     private val _vendorList = MutableStateFlow<List<Vendor>?>(null)
@@ -45,7 +51,7 @@ class VendorsVM @Inject constructor(
     }
 
     private fun collectQueryChanges() {
-        viewModelScope.launch {
+        viewModelScope.launch(coroutineExceptionHandler) {
             _searchQuery.debounce(DEBOUNCE_TIME).collectLatest {
                 if (it.isEmpty() || it.length >= MIN_SEARCH_QUERY_LENGTH) {
                     getVendors(it)
@@ -57,7 +63,7 @@ class VendorsVM @Inject constructor(
     fun getVendors(query: String = "") {
         searchJob?.cancel()
 
-        searchJob = viewModelScope.launch {
+        searchJob = viewModelScope.launch(coroutineExceptionHandler) {
             _vendorList.value = if (query.isBlank()) {
                 repository.getVendors()
             } else {

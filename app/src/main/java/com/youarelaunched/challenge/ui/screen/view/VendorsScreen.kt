@@ -13,6 +13,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.youarelaunched.challenge.ui.screen.state.VendorsScreenUiState
 import com.youarelaunched.challenge.ui.screen.view.components.ChatsumerSnackbar
@@ -20,6 +21,8 @@ import com.youarelaunched.challenge.ui.screen.view.components.NoResultsPlacehold
 import com.youarelaunched.challenge.ui.screen.view.components.SearchField
 import com.youarelaunched.challenge.ui.screen.view.components.VendorItem
 import com.youarelaunched.challenge.ui.theme.VendorAppTheme
+
+const val VENDORS_LIST_TEST_TAG = "VENDORS_LIST"
 
 @Composable
 fun VendorsRoute(
@@ -62,7 +65,8 @@ fun VendorsScreen(
             if (!uiState.vendors.isNullOrEmpty()) {
                 LazyColumn(
                     modifier = Modifier
-                        .fillMaxSize(),
+                        .fillMaxSize()
+                        .testTag(VENDORS_LIST_TEST_TAG),
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                     contentPadding = PaddingValues(
                         vertical = 24.dp,

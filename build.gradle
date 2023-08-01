@@ -11,7 +11,8 @@ buildscript {
 
         //Coroutines RN https://github.com/Kotlin/kotlinx.coroutines
         coroutines = [
-                lib: "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+                lib: "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4",
+                test: "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
         ]
 
         //AndroidX core RN https://developer.android.com/jetpack/androidx/releases/core
@@ -31,6 +32,8 @@ buildscript {
                 lib      : "com.google.dagger:hilt-android:$hiltVersion",
                 kapt     : "com.google.dagger:hilt-android-compiler:$hiltVersion",
                 classpath: "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion",
+                test     : "com.google.dagger:hilt-android-testing:$hiltVersion",
+                kaptTest : "com.google.dagger:hilt-android-compiler:$hiltVersion"
         ]
 
         composeUiVersion = "1.2.0-rc03"
@@ -47,7 +50,9 @@ buildscript {
                 //Compose tooling RN https://developer.android.com/jetpack/compose/tooling
                 uiToolingPreview: "androidx.compose.ui:ui-tooling-preview:$composeUiVersion",
                 //Constraint layout https://developer.android.com/jetpack/compose/layouts/constraintlayout
-                constraintLayout: "androidx.constraintlayout:constraintlayout-compose:1.0.1"
+                constraintLayout: "androidx.constraintlayout:constraintlayout-compose:1.0.1",
+                uiTest          : "androidx.compose.ui:ui-test-junit4:$composeUiVersion",
+                testManifest    : "androidx.compose.ui:ui-test-manifest:$composeUiVersion"
         ]
 
         //Accompanist RN https://github.com/google/accompanist/releases
@@ -68,6 +73,24 @@ buildscript {
         retrofit = [
                 lib          : "com.squareup.retrofit2:retrofit:$retrofitVersion",
                 jsonConverter: "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+        ]
+
+        junitVersion = "4.13.2"
+        junit = [
+                lib          : "junit:junit:$junitVersion"
+        ]
+
+        kotlinTest = [
+                lib          : "org.jetbrains.kotlin:kotlin-test"
+        ]
+
+        androidXTest = [
+                testCore     : "androidx.test:core:1.5.0",
+                espresso     : "androidx.test.espresso:espresso-core:3.5.1",
+                testExt      : "androidx.test.ext:junit-ktx:1.1.5",
+                testRules    : "androidx.test:rules:1.5.0",
+                testRunner   : "androidx.test:runner:1.5.2",
+                uiAutomator  : "androidx.test.uiautomator:uiautomator:2.2.0"
         ]
     }
 
